@@ -12,8 +12,26 @@ import (
 
 type server struct{}
 
+func (*server) PrimeNumberDecomposition(req *calcpb.PrimeNumberDecompositionRequest, stream calcpb.CalculatorService_PrimeNumberDecompositionServer) error {
+	fmt.Printf("Received RrimeNumberDecompositionRequest: %v\n", req)
+	number := req.GetNumber()
+	divisor := int64(2)
+	for number > 1 {
+		if number%divisor == 0 {
+			stream.Send(&calcpb.PrimeNumberDecompositionResponse{
+				PrimeFactor: divisor,
+			})
+			number = number / divisor
+		} else {
+			divisor++
+			fmt.Printf("Divisor has increased to %v", divisor)
+		}
+	}
+	return nil
+}
+
 func (*server) Sum(ctx context.Context, req *calcpb.SumRequest) (*calcpb.SumResponse, error) {
-	fmt.Printf("Received sum RPC: %v", req)
+	fmt.Printf("Received sum RPC: %v\n", req)
 	firstNumber := req.FirstNumber
 	secondNumber := req.SecondNumber
 	sum := firstNumber + secondNumber
@@ -23,6 +41,7 @@ func (*server) Sum(ctx context.Context, req *calcpb.SumRequest) (*calcpb.SumResp
 	return res, nil
 
 }
+
 func main() {
 	fmt.Println("Calculator server started...")
 	lis, err := net.Listen("tcp", "0.0.0.0:50051")
