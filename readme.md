@@ -2,6 +2,7 @@
 say "hello" to you
 - unary rpc
 - server streaming rpc
+- client streaming rpc
 
 # caclulato gRPC serice
 calculate sum of two numbers
