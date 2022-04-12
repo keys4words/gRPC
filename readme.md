@@ -4,7 +4,11 @@ say "hello" to you
 - server streaming rpc
 - client streaming rpc
 
-# caclulato gRPC serice
-calculate sum of two numbers
-- unary rpc
-- 
+# sum of two numbers
+- unary example
+
+# prime number decomposition
+- server streaming example
+
+# compute average
+- client streaming example

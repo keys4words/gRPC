@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"net"
 
@@ -40,6 +41,26 @@ func (*server) Sum(ctx context.Context, req *calcpb.SumRequest) (*calcpb.SumResp
 	}
 	return res, nil
 
+}
+
+func (*server) ComputeAverage(stream calcpb.CalculatorService_ComputeAverageServer) error {
+	fmt.Println("Received ComputeAverage RPC")
+	sum := 0
+	count := 0
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			average := float64(sum) / float64(count)
+			return stream.SendAndClose(&calcpb.ComputeAverageResponse{
+				Average: average,
+			})
+		}
+		if err != nil {
+			log.Fatalf("Error while reading client stream: %v", err)
+		}
+		sum += int(req.GetNumber())
+		count++
+	}
 }
 
 func main() {
