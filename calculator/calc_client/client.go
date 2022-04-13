@@ -46,6 +46,26 @@ func doServerStreaming(c calcpb.CalculatorServiceClient) {
 	}
 }
 
+func doClientStreaming(c calcpb.CalculatorServiceClient) {
+	fmt.Println("Starting to do ClientStreaming RPC...")
+	stream, err := c.ComputeAverage(context.Background())
+	if err != nil {
+		log.Fatalf("Error while calling CalcAverageRequest RPC: %v", err)
+	}
+	numbers := []int32{3, 5, 9, 54, 23}
+	for _, number := range numbers {
+		fmt.Printf("Sending number: %v\n", number)
+		stream.Send(&calcpb.ComputeAverageRequest{
+			Number: number,
+		})
+	}
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Fatalf("Error while receiving response: %v", err)
+	}
+	fmt.Printf("The Average is: %v\n", res.GetAverage())
+}
+
 func main() {
 	fmt.Println("Calc client started...")
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
@@ -57,5 +77,6 @@ func main() {
 	c := calcpb.NewCalculatorServiceClient(conn)
 
 	// doUnary(c)
-	doServerStreaming(c)
+	// doServerStreaming(c)
+	doClientStreaming(c)
 }
