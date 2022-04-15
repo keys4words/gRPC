@@ -13,3 +13,6 @@ say "hello" to you
 
 # compute average
 - client streaming example
+
+# find maximum
+- bi-directioanl streaming example
