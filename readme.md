@@ -5,14 +5,9 @@ say "hello" to you
 - client streaming rpc
 - bi-directional streaming rpc
 
-# sum of two numbers
-- unary example
-
-# prime number decomposition
-- server streaming example
-
-# compute average
-- client streaming example
-
-# find maximum
-- bi-directioanl streaming example
+# calculator gRPC service
+1. sum of two numbers (unary example)
+2. prime number decomposition (server streaming example)
+3. compute average (client streaming example)
+4. find maximum (bi-directioanl streaming example)
+5. square root (unary with errors)
