@@ -4,6 +4,7 @@ say "hello" to you
 - server streaming rpc
 - client streaming rpc
 - bi-directional streaming rpc
+- unary with deadline rpc
 
 # calculator gRPC service
 1. sum of two numbers (unary example)
