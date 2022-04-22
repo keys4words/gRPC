@@ -19,3 +19,6 @@ say "hello" to you
 - show package/service/message
 - desc <any-message>
 - call <any-rpc> (use ctrl-d for streaming calc)
+
+# blog gRPC service
+1. Mongo DB in container
