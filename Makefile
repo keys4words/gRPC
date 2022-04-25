@@ -6,3 +6,8 @@ genc:
 
 genb:
 	protoc blog/blogpb/blog.proto --go_out=plugins=grpc:.
+
+runblog:
+	docker-compose up -d
+	sleep 9
+	go run blog_server/server.go
