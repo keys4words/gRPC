@@ -6,10 +6,10 @@ services:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_DATABASE: main
+      MONGO_INITDB_DATABASE: mydb
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    # volumes:
+      # - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     ports:
       - "27017:27017"
