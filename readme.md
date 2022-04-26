@@ -22,4 +22,10 @@ say "hello" to you
 
 # blog gRPC service
 1. Mongo DB in container
-2. 
+2. CRUD rpc:
+- CreateBlog - create new blog post
+- ReadBlog - read existing blog post by id
+- UpdateBlog - update existing blog post by id
+- DeleteBlog - delete existing blog post by id
+- ListBlog - show all posts
+3. evans cli
